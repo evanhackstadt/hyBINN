@@ -1,7 +1,9 @@
 # Currently: CSCI 184 Final Project
-Final project for CSCI 184: Advanced Machine Learning
-A Biologically-Informed Neural Network that:
-1. Takes gene expression values as an input
+Final project for CSCI 184: Advanced Machine Learning. 
+
+A Biologically-Informed Neural Network for Breast Cancer Survival Prediction.
+The model:
+1. Takes gene expression (RNAseq) values as an input
 2. Uses a sparsely connected first layer that maps input genes to known pathways
 3. Moves through two more hidden layers
 4. Outputs a risk score for that patient's survival (an input into Cox Proportional Hazards)
@@ -13,7 +15,7 @@ This repo consists of all files used to preprocess data, build the model, and tr
 hybinn/
 │
 ├── data/
-│   ├── raw/ — raw data downloaded from UCSC Xena
+│   ├── raw/ — raw breast cancer data downloaded from UCSC Xena
 │   ├── processed/ — data saved during preprocessing, including the main data.csv used for training
 │   └── reactome/ — raw data downloaded from Reactome
 │
