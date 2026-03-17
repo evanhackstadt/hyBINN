@@ -1,0 +1,83 @@
+=========================================
+trainer.py log started 2026-03-16 23:38:11.807730
+Model: StandaloneBINN
+	in_nodes: 3563
+	pathway_nodes: 491
+	hidden_nodes: 100
+	out_nodes: 30
+Train: 0.7 = 742 samples
+Validation: 0.15 = 159 samples
+Epochs: 10
+Alpha: 0.001
+Weight_Decay: 0.0001
+Epoch 1
+-------------------------------
+loss: 2.671119  [   64/  742]
+loss: 2.906080  [  704/  742]
+Average Training Loss: 0.507018
+Val Loss: 2.6349 | C-index: 0.4715
+
+Epoch 2
+-------------------------------
+loss: 3.206809  [   64/  742]
+loss: 3.108898  [  704/  742]
+Average Training Loss: 0.574155
+Val Loss: 2.6388 | C-index: 0.4209
+
+Epoch 3
+-------------------------------
+loss: 2.673504  [   64/  742]
+loss: 2.979745  [  704/  742]
+Average Training Loss: 0.513932
+Val Loss: 2.6823 | C-index: 0.4209
+
+Epoch 4
+-------------------------------
+loss: 2.809264  [   64/  742]
+loss: 2.111972  [  704/  742]
+Average Training Loss: 0.447385
+Val Loss: 2.7762 | C-index: 0.4700
+
+Epoch 5
+-------------------------------
+loss: 1.910091  [   64/  742]
+loss: 2.111982  [  704/  742]
+Average Training Loss: 0.365643
+Val Loss: 2.8113 | C-index: 0.5307
+
+Epoch 6
+-------------------------------
+loss: 2.319345  [   64/  742]
+loss: 2.202120  [  704/  742]
+Average Training Loss: 0.411042
+Val Loss: 3.0348 | C-index: 0.5379
+
+Epoch 7
+-------------------------------
+loss: 1.894445  [   64/  742]
+loss: 2.005134  [  704/  742]
+Average Training Loss: 0.354507
+Val Loss: 3.4386 | C-index: 0.5285
+
+Epoch 8
+-------------------------------
+loss: 1.668297  [   64/  742]
+loss: 1.467894  [  704/  742]
+Average Training Loss: 0.285108
+Val Loss: 3.4435 | C-index: 0.5661
+
+Epoch 9
+-------------------------------
+loss: 1.475000  [   64/  742]
+loss: 1.431155  [  704/  742]
+Average Training Loss: 0.264196
+Val Loss: 3.7526 | C-index: 0.5819
+
+Epoch 10
+-------------------------------
+loss: 1.925217  [   64/  742]
+loss: 1.682858  [  704/  742]
+Average Training Loss: 0.328007
+Val Loss: 3.9783 | C-index: 0.5415
+
+Done!

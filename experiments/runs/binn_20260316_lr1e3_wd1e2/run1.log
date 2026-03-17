@@ -1,0 +1,96 @@
+=========================================
+trainer.py log started 2026-03-17 00:18:57.411784
+Model: StandaloneBINN
+	in_nodes: 3563
+	pathway_nodes: 491
+	hidden_nodes: 64
+	out_nodes: 24
+Train: 0.7 = 742 samples
+Validation: 0.15 = 159 samples
+Batch Size: 128
+Epochs: 15
+Alpha: 0.001
+Weight_Decay: 0.01
+Epoch 1
+-------------------------------
+loss: 3.330878  [  128/  742]
+loss: 3.492786  [  256/  742]
+loss: 3.764413  [  384/  742]
+loss: 3.796238  [  512/  742]
+loss: 3.538845  [  640/  742]
+Average Training Loss: 3.584632
+Val Loss: 2.8687 | C-index: 0.4917
+
+Epoch 2
+-------------------------------
+loss: 3.730072  [  128/  742]
+loss: 3.706264  [  256/  742]
+loss: 3.766177  [  384/  742]
+loss: 3.148008  [  512/  742]
+loss: 3.249567  [  640/  742]
+Average Training Loss: 3.520018
+Val Loss: 2.8687 | C-index: 0.4303
+
+Epoch 3
+-------------------------------
+loss: 3.542411  [  128/  742]
+loss: 3.531074  [  256/  742]
+loss: 3.384192  [  384/  742]
+loss: 3.575064  [  512/  742]
+loss: 3.746556  [  640/  742]
+Average Training Loss: 3.555859
+Val Loss: 2.8688 | C-index: 0.4339
+
+Epoch 4
+-------------------------------
+loss: 3.604897  [  128/  742]
+loss: 3.657601  [  256/  742]
+loss: 3.790884  [  384/  742]
+loss: 3.215893  [  512/  742]
+loss: 3.706047  [  640/  742]
+Average Training Loss: 3.595065
+Val Loss: 2.8693 | C-index: 0.4325
+
+Epoch 5
+-------------------------------
+loss: 3.304280  [  128/  742]
+loss: 3.911311  [  256/  742]
+loss: 3.820647  [  384/  742]
+loss: 3.403126  [  512/  742]
+loss: 3.639681  [  640/  742]
+Average Training Loss: 3.615809
+Val Loss: 2.8710 | C-index: 0.4282
+
+Epoch 6
+-------------------------------
+loss: 3.608130  [  128/  742]
+loss: 3.898563  [  256/  742]
+loss: 3.485867  [  384/  742]
+loss: 3.124534  [  512/  742]
+loss: 3.745012  [  640/  742]
+Average Training Loss: 3.572421
+Val Loss: 2.8742 | C-index: 0.4224
+
+Epoch 7
+-------------------------------
+loss: 3.486676  [  128/  742]
+loss: 3.401560  [  256/  742]
+loss: 3.720649  [  384/  742]
+loss: 3.592063  [  512/  742]
+loss: 3.818398  [  640/  742]
+Average Training Loss: 3.603869
+Val Loss: 2.8827 | C-index: 0.4296
+
+Epoch 8
+-------------------------------
+loss: 3.235691  [  128/  742]
+loss: 3.362154  [  256/  742]
+loss: 3.922165  [  384/  742]
+loss: 3.175147  [  512/  742]
+loss: 3.159848  [  640/  742]
+Average Training Loss: 3.371001
+Val Loss: 2.8996 | C-index: 0.4332
+
+Stopping early at Epoch 8 since no C-Index improvement after 7 epochs.
+Done!
+Best C-Index = 0.49169675090252707 at Epoch 1
