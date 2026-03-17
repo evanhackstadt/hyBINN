@@ -8,20 +8,30 @@ dependencies:
   - aom=3.9.1=h7bae524_0
   - appnope=0.1.4=pyhd8ed1ab_1
   - asttokens=3.0.1=pyhd8ed1ab_0
+  - autograd=1.8.0=pyhd8ed1ab_0
+  - autograd-gamma=0.5.0=pyhd8ed1ab_1
+  - brotli-bin=1.2.0=hc919400_1
   - bzip2=1.0.8=hd037594_8
-  - ca-certificates=2026.1.4=hbd8a1cb_0
+  - ca-certificates=2026.2.25=hbd8a1cb_0
+  - captum=0.7.0=pyhd8ed1ab_0
   - comm=0.2.3=pyhe01879c_0
+  - contourpy=1.3.3=py313h2af2deb_4
   - cpython=3.13.11=py313hd8ed1ab_100
+  - cycler=0.12.1=pyhcf101f3_2
   - dav1d=1.2.1=hb547adb_0
   - debugpy=1.8.19=py313hc37fe24_0
   - decorator=5.2.1=pyhd8ed1ab_0
   - executing=2.2.1=pyhd8ed1ab_0
   - filelock=3.20.1=pyhd8ed1ab_0
   - fmt=12.0.0=h669d743_0
+  - fonttools=4.62.0=py313h65a2061_0
+  - formulaic=1.2.1=pyhd8ed1ab_2
+  - freetype=2.14.1=hce30654_0
   - fsspec=2025.12.0=pyhd8ed1ab_0
   - giflib=5.2.2=h93a5062_0
   - gmp=6.3.0=h7bae524_2
   - gmpy2=2.2.1=py313hc1c22ca_2
+  - interface_meta=1.3.0=pyhd8ed1ab_1
   - ipykernel=7.1.0=pyh5552912_0
   - ipython=9.8.0=pyh53cf698_0
   - ipython_pygments_lexers=1.1.1=pyhd8ed1ab_0
@@ -30,12 +40,16 @@ dependencies:
   - joblib=1.5.3=pyhd8ed1ab_0
   - jupyter_client=8.7.0=pyhcf101f3_0
   - jupyter_core=5.9.1=pyhc90fa1f_0
+  - kiwisolver=1.5.0=py313h2af2deb_0
   - krb5=1.21.3=h237132a_0
   - lcms2=2.17=h7eeda09_0
   - lerc=4.0.0=hd64df32_1
   - libabseil=20250512.1=cxx17_hd41c47c_0
   - libavif16=1.3.0=hb06b76e_2
   - libblas=3.11.0=5_h51639a9_openblas
+  - libbrotlicommon=1.2.0=hc919400_1
+  - libbrotlidec=1.2.0=hc919400_1
+  - libbrotlienc=1.2.0=hc919400_1
   - libcblas=3.11.0=5_hb0561ab_openblas
   - libcxx=21.1.8=hf598326_0
   - libde265=1.0.15=h2ffa867_0
@@ -64,19 +78,23 @@ dependencies:
   - libwebp-base=1.6.0=h07db88b_0
   - libxcb=1.17.0=hdb1d25a_0
   - libzlib=1.3.1=h8359307_2
+  - lifelines=0.30.1=pyhd8ed1ab_0
   - llvm-openmp=21.1.7=h4a912ad_0
   - markupsafe=3.0.3=py313h7d74516_0
+  - matplotlib-base=3.10.8=py313h58042b9_0
   - matplotlib-inline=0.2.1=pyhd8ed1ab_0
   - mpc=1.3.1=h8f1351a_1
   - mpfr=4.2.1=hb693164_3
   - mpmath=1.3.0=pyhd8ed1ab_1
+  - munkres=1.1.4=pyhd8ed1ab_1
+  - narwhals=2.18.0=pyhcf101f3_0
   - ncurses=6.5=h5e97a16_3
   - nest-asyncio=1.6.0=pyhd8ed1ab_1
   - networkx=3.6.1=pyhcf101f3_0
   - nomkl=1.0=h5ca1d4c_0
   - numpy=2.3.5=py313h9771d21_0
   - openjpeg=2.5.4=hbfb3c88_0
-  - openssl=3.6.0=h5503f6c_0
+  - openssl=3.6.1=hd24854e_1
   - optree=0.18.0=py313ha61f8ec_0
   - packaging=25.0=pyh29332c3_1
   - pandas=2.3.3=py313h7d16b84_2
@@ -94,6 +112,7 @@ dependencies:
   - pybind11-abi=11=hc364b38_1
   - pybind11-global=3.0.1=pyhc7ab6ef_0
   - pygments=2.19.2=pyhd8ed1ab_0
+  - pyparsing=3.3.2=pyhcf101f3_0
   - python=3.13.11=hfc2f54d_100_cp313
   - python-dateutil=2.9.0.post0=pyhe01879c_2
   - python-gil=3.13.11=h4df99d1_100
@@ -102,6 +121,7 @@ dependencies:
   - pytorch=2.9.1=cpu_generic_py313_h6bf06e3_1
   - pytz=2025.2=pyhd8ed1ab_0
   - pyzmq=27.1.0=py312hd65ceae_0
+  - qhull=2020.2=h420ef59_5
   - rav1e=0.7.1=h0716509_3
   - readline=8.3=h46df422_0
   - scikit-learn=1.8.0=np2py313h3b23316_1
@@ -117,15 +137,40 @@ dependencies:
   - torchvision=0.24.1=cpu_py313_he409f2d_0
   - torchvision-extra-decoders=0.0.2=py313hed7f121_5
   - tornado=6.5.4=py313h6535dbc_0
+  - tqdm=4.67.3=pyh8f84b5b_0
   - traitlets=5.14.3=pyhd8ed1ab_1
   - typing-extensions=4.15.0=h396c80c_0
   - typing_extensions=4.15.0=pyhcf101f3_0
   - tzdata=2025c=h8577fbf_0
   - wcwidth=0.2.14=pyhd8ed1ab_0
+  - wrapt=2.1.2=py313h0997733_0
   - x265=3.5=hbc6ce65_3
   - xorg-libxau=1.0.12=hc919400_1
   - xorg-libxdmcp=1.1.5=hc919400_1
   - zeromq=4.3.5=h888dc83_9
   - zlib-ng=2.3.2=h248ca61_0
   - zstd=1.5.7=hbf9d68e_6
+  - pip:
+      - backports-zstd==1.3.0
+      - brotli==1.2.0
+      - certifi==2026.2.25
+      - charset-normalizer==3.4.6
+      - feather-format==0.4.1
+      - h5py==3.16.0
+      - hybinn==0.1.0
+      - idna==3.11
+      - inflate64==1.0.4
+      - llvmlite==0.46.0
+      - multivolumefile==0.2.3
+      - numba==0.64.0
+      - py7zr==1.1.0
+      - pyarrow==23.0.1
+      - pybcj==1.0.7
+      - pycox==0.3.0
+      - pycryptodomex==3.23.0
+      - pyppmd==1.3.1
+      - requests==2.32.5
+      - texttable==1.7.0
+      - torchtuples==0.2.2
+      - urllib3==2.6.3
 prefix: /Users/evan/anaconda3/envs/hybinn
