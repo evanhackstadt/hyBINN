@@ -29,10 +29,11 @@ class StandaloneBINN(nn.Module):
         # apply the mask matrix and update sc1's weights
         masked_weights = self.sc1.weight * self.mask.T
         
-        # forward pass
-        # mask input genes --> pathway layer
+        # manually calculate sc1: mask input genes --> pathway layer
         x = self.tanh(F.linear(x, masked_weights, self.sc1.bias))
-        # following layers are normal
+        self.pathway_activations = x  # store it for interpretability
+        
+        # the following layers are normal
         x = self.tanh(self.sc2(x))
         x = self.tanh(self.sc3(x))
         x = self.sc4(x)

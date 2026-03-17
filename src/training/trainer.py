@@ -60,10 +60,14 @@ def evaluate(model, dataloader, loss_fn, device, logger):
     
     Args:
         model (torch.nn.Module): model object
-        loader (torch DataLoader): the dataloader to train on
+        loader (torch DataLoader): the dataloader to evaluate on (e.g. val or test)
         loss_fn (function): the custom cox loss function
         device (torch.cuda.device): train on gpu or cpu
         logger (Logger): logger object
+    
+    Returns:
+        val_loss (float): average loss across the set
+        cindex (float): overall C-Index across the set
     """
     
     model.eval()
@@ -91,8 +95,7 @@ def evaluate(model, dataloader, loss_fn, device, logger):
     events = np.concatenate(all_events)
     
     cindex = concordance_index(times, -preds, events)  # negative preds since higher risk = lower survival time
-    
-    logger.info(f"Val Loss: {val_loss:.4f} | C-index: {cindex:.4f}\n")
+
     return val_loss, cindex
 
 
@@ -160,6 +163,7 @@ def train(model, train_loader, val_loader, train_proportion, val_proportion,
         logger.info(f"Epoch {epoch+1}\n-------------------------------")
         train_loss = train_one_epoch(model, train_loader, optimizer, loss_fn, device, logger)
         val_loss, cindex = evaluate(model, val_loader, loss_fn, device, logger)
+        logger.info(f"Val Loss: {val_loss:.4f} | C-index: {cindex:.4f}\n")  # log evaluation outside of function for now
         
         # store losses
         train_losses.append(train_loss)
@@ -182,3 +186,33 @@ def train(model, train_loader, val_loader, train_proportion, val_proportion,
     logger.info(f"Best C-Index = {best_cindex} at Epoch {best_epoch}")
     
     return train_losses, val_losses, cindexes
+
+
+def test(model, test_loader, best_model_file, logfile):
+    """
+    Separate testing loop to be run after training, getting a final unbiased evaluation of the model
+    
+    Args:
+        model (torch.nn.Module): model object
+        test_loader (torch DataLoader): dataloader for the testing set
+        best_model_file (str): path to the best_model.pt file to load and test
+        logfile (str): path to the .log file (in experiments/runs/...) to log results to
+    
+    Returns:
+        test_losses (list): average testing loss
+        test_cindex (float): overall C-Index of the test set
+    """
+    
+    loss_fn = cox_loss
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    log_path = os.path.abspath(logfile)
+    logger = get_logger("tester", log_path)
+    
+    # Load and test model
+    model.load_state_dict(torch.load(best_model_file))
+    avg_test_loss, test_cindex = evaluate(model, test_loader, loss_fn, device, logger)
+    
+    logger.info(f"FINAL TEST Average Loss: {avg_test_loss:.4f}")
+    logger.info(f"FINAL TEST C-index: {test_cindex:.4f}")
+    
+    return avg_test_loss, test_cindex
