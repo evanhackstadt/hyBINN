@@ -10,7 +10,7 @@ class StandaloneBINN(nn.Module):
         super(StandaloneBINN, self).__init__()
         
         self.tanh = nn.Tanh()
-        self.dropout = nn.Dropout(p=0.5)  # tune p
+        self.dropout = nn.Dropout(p=0.5)  # TODO: tune p
         # save pathway mask
         self.register_buffer("mask", torch.tensor(pathway_mask))
         
@@ -27,7 +27,7 @@ class StandaloneBINN(nn.Module):
     
     def forward(self, x):
         # apply the mask matrix and update sc1's weights
-        masked_weights = self.sc1.weight * self.mask
+        masked_weights = self.sc1.weight * self.mask.T
         
         # forward pass
         # mask input genes --> pathway layer
@@ -37,17 +37,3 @@ class StandaloneBINN(nn.Module):
         x = self.tanh(self.sc3(x))
         x = self.sc4(x)
         return x
-
-
-# TEMP TESTING
-import pandas as pd
-from processing.reactome import build_reactome_map, build_mask_matrix
-from processing.split_genes import split_genes
-
-df = pd.read_csv("../../data/processed/data.csv")
-
-pathway_map = build_reactome_map("../../data/reactome/Ensembl2Reactome_All_Levels.txt")
-mapped, unmapped, valid_pathways = split_genes(df, pathway_map)
-mask, gene_labels, pathway_labels = build_mask_matrix(mapped, pathway_map, valid_pathways)
-
-net = StandaloneBINN(len(gene_labels), len(pathway_labels), 100, 30, mask)
