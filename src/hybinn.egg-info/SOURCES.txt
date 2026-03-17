@@ -20,4 +20,5 @@ src/training/loss.py
 src/training/metrics.py
 src/training/trainer.py
 src/utils/__init__.py
+src/utils/logging.py
 src/utils/seed.py
