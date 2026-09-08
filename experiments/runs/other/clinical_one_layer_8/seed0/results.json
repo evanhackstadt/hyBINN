@@ -1,0 +1,41 @@
+{
+  "model": [
+    "clinical"
+  ],
+  "seed": 0,
+  "n_trainval": 847,
+  "n_test": 212,
+  "cv_mean_cindex": 0.6917864937000326,
+  "cv_std_cindex": 0.06716448679418116,
+  "mean_best_epoch": 6,
+  "fold_cindices": [
+    0.7535014005602241,
+    0.6921475312314099,
+    0.7787234042553192,
+    0.6238390092879257,
+    0.6107211231652839
+  ],
+  "fold_best_epochs": [
+    5,
+    19,
+    1,
+    2,
+    1
+  ],
+  "retrain_mean_cindex": 0.6635458200844563,
+  "retrain_std_cindex": 0.0014011953940375054,
+  "test_cindex": 0.6327297574308165,
+  "test_loss": 2.6771458089351654,
+  "bootstrap_ci": {
+    "mean": 0.6338054070879354,
+    "std": 0.05549722144884701,
+    "lower": 0.5295058312993653,
+    "upper": 0.7407879234384667,
+    "n_bootstrap": 1000,
+    "n_valid": 1000,
+    "ci_level": 0.95
+  },
+  "branch_weights": {
+    "clinical": 1.0
+  }
+}

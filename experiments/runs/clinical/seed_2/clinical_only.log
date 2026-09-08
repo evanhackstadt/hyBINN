@@ -1,0 +1,480 @@
+train_hybinn.py log started 2026-06-05 21:28:22.363872
+=========================================
+Model Active Branches: ['clinical']
+=========================================
+
+=========================================
+FOLD 1/5
+=========================================
+
+Epoch 1
+-------------------------------
+loss: 2.282562  [   64/  677]
+loss: 2.711493  [  256/  677]
+loss: 2.704386  [  448/  677]
+loss: 2.832121  [  640/  677]
+Average Training Loss: 0.957324
+Val Loss: 3.1142 | C-index: 0.6491
+
+Epoch 2
+-------------------------------
+loss: 2.989531  [   64/  677]
+loss: 2.105939  [  256/  677]
+loss: 3.193665  [  448/  677]
+loss: 2.908028  [  640/  677]
+Average Training Loss: 1.017924
+Val Loss: 3.1073 | C-index: 0.6569
+
+Epoch 3
+-------------------------------
+loss: 3.502798  [   64/  677]
+loss: 2.710219  [  256/  677]
+loss: 3.321348  [  448/  677]
+loss: 3.095520  [  640/  677]
+Average Training Loss: 1.148171
+Val Loss: 3.0952 | C-index: 0.6730
+
+Epoch 4
+-------------------------------
+loss: 2.656998  [   64/  677]
+loss: 3.062723  [  256/  677]
+loss: 3.179403  [  448/  677]
+loss: 2.985030  [  640/  677]
+Average Training Loss: 1.080378
+Val Loss: 3.0847 | C-index: 0.6769
+
+Epoch 5
+-------------------------------
+loss: 2.935922  [   64/  677]
+loss: 3.399733  [  256/  677]
+loss: 2.799689  [  448/  677]
+loss: 3.057404  [  640/  677]
+Average Training Loss: 1.108432
+Val Loss: 3.0654 | C-index: 0.6852
+
+Epoch 6
+-------------------------------
+loss: 2.831031  [   64/  677]
+loss: 2.562987  [  256/  677]
+loss: 3.255713  [  448/  677]
+loss: 3.304771  [  640/  677]
+Average Training Loss: 1.086773
+Val Loss: 3.0449 | C-index: 0.6891
+
+Epoch 7
+-------------------------------
+loss: 2.459355  [   64/  677]
+loss: 3.146998  [  256/  677]
+loss: 2.346321  [  448/  677]
+loss: 3.080514  [  640/  677]
+Average Training Loss: 1.003017
+Val Loss: 3.0218 | C-index: 0.7155
+
+Epoch 8
+-------------------------------
+loss: 2.946137  [   64/  677]
+loss: 3.186591  [  256/  677]
+loss: 2.619924  [  448/  677]
+loss: 2.687379  [  640/  677]
+Average Training Loss: 1.040003
+Val Loss: 3.0101 | C-index: 0.7155
+
+Epoch 9
+-------------------------------
+loss: 2.911295  [   64/  677]
+loss: 2.963611  [  256/  677]
+loss: 2.774166  [  448/  677]
+loss: 2.602470  [  640/  677]
+Average Training Loss: 1.022867
+Val Loss: 2.9989 | C-index: 0.7155
+
+Epoch 10
+-------------------------------
+loss: 2.668947  [   64/  677]
+loss: 3.018077  [  256/  677]
+loss: 2.721497  [  448/  677]
+loss: 3.290412  [  640/  677]
+Average Training Loss: 1.063539
+Val Loss: 2.9844 | C-index: 0.7125
+
+Epoch 11
+-------------------------------
+loss: 2.998321  [   64/  677]
+loss: 2.539959  [  256/  677]
+loss: 2.732246  [  448/  677]
+loss: 3.026944  [  640/  677]
+Average Training Loss: 1.027043
+Val Loss: 2.9762 | C-index: 0.7306
+
+Epoch 12
+-------------------------------
+loss: 2.579499  [   64/  677]
+loss: 3.207782  [  256/  677]
+loss: 2.898807  [  448/  677]
+loss: 2.526929  [  640/  677]
+Average Training Loss: 1.019365
+Val Loss: 2.9572 | C-index: 0.7330
+
+Epoch 13
+-------------------------------
+loss: 2.219293  [   64/  677]
+loss: 3.033605  [  256/  677]
+loss: 2.494696  [  448/  677]
+loss: 2.070499  [  640/  677]
+Average Training Loss: 0.892554
+Val Loss: 2.9478 | C-index: 0.7316
+
+Epoch 14
+-------------------------------
+loss: 2.658034  [   64/  677]
+loss: 2.393213  [  256/  677]
+loss: 2.922511  [  448/  677]
+loss: 2.934959  [  640/  677]
+Average Training Loss: 0.991701
+Val Loss: 2.9256 | C-index: 0.7316
+
+Epoch 15
+-------------------------------
+loss: 2.710558  [   64/  677]
+loss: 2.845344  [  256/  677]
+loss: 3.213411  [  448/  677]
+loss: 2.633103  [  640/  677]
+Average Training Loss: 1.036583
+Val Loss: 2.9335 | C-index: 0.7228
+
+Epoch 16
+-------------------------------
+loss: 3.073431  [   64/  677]
+loss: 3.022655  [  256/  677]
+loss: 3.318873  [  448/  677]
+loss: 2.687927  [  640/  677]
+Average Training Loss: 1.100262
+Val Loss: 2.9235 | C-index: 0.6681
+
+Epoch 17
+-------------------------------
+loss: 3.107336  [   64/  677]
+loss: 3.113549  [  256/  677]
+loss: 2.360642  [  448/  677]
+loss: 3.466112  [  640/  677]
+Average Training Loss: 1.095240
+Val Loss: 2.9165 | C-index: 0.6606
+
+Stopping early at Epoch 17 since no C-Index improvement after 5 epochs.
+Done!
+Best C-Index = 0.7330405075646657 at Epoch 12
+
+=========================================
+FOLD 2/5
+=========================================
+
+Epoch 1
+-------------------------------
+loss: 3.029832  [   64/  677]
+loss: 2.527727  [  256/  677]
+loss: 3.250193  [  448/  677]
+loss: 2.749129  [  640/  677]
+Average Training Loss: 1.050626
+Val Loss: 2.9984 | C-index: 0.7794
+
+Epoch 2
+-------------------------------
+loss: 2.322786  [   64/  677]
+loss: 3.184843  [  256/  677]
+loss: 2.900272  [  448/  677]
+loss: 3.125338  [  640/  677]
+Average Training Loss: 1.048476
+Val Loss: 2.9921 | C-index: 0.7733
+
+Epoch 3
+-------------------------------
+loss: 3.550905  [   64/  677]
+loss: 2.405591  [  256/  677]
+loss: 2.925264  [  448/  677]
+loss: 3.061209  [  640/  677]
+Average Training Loss: 1.085724
+Val Loss: 2.9821 | C-index: 0.7589
+
+Epoch 4
+-------------------------------
+loss: 3.403020  [   64/  677]
+loss: 2.923854  [  256/  677]
+loss: 2.761196  [  448/  677]
+loss: 2.079082  [  640/  677]
+Average Training Loss: 1.015196
+Val Loss: 2.9731 | C-index: 0.7611
+
+Epoch 5
+-------------------------------
+loss: 3.216201  [   64/  677]
+loss: 3.575623  [  256/  677]
+loss: 3.419678  [  448/  677]
+loss: 3.259870  [  640/  677]
+Average Training Loss: 1.224670
+Val Loss: 2.9646 | C-index: 0.7749
+
+Epoch 6
+-------------------------------
+loss: 3.216832  [   64/  677]
+loss: 2.504220  [  256/  677]
+loss: 3.354709  [  448/  677]
+loss: 2.730189  [  640/  677]
+Average Training Loss: 1.073268
+Val Loss: 2.9567 | C-index: 0.7755
+
+Stopping early at Epoch 6 since no C-Index improvement after 5 epochs.
+Done!
+Best C-Index = 0.779379157427938 at Epoch 1
+
+=========================================
+FOLD 3/5
+=========================================
+
+Epoch 1
+-------------------------------
+loss: 3.308617  [   64/  678]
+loss: 2.724812  [  256/  678]
+loss: 3.038235  [  448/  678]
+loss: 2.798774  [  640/  678]
+Average Training Loss: 1.079131
+Val Loss: 2.4136 | C-index: 0.6548
+
+Epoch 2
+-------------------------------
+loss: 2.817958  [   64/  678]
+loss: 2.807261  [  256/  678]
+loss: 2.919395  [  448/  678]
+loss: 3.140146  [  640/  678]
+Average Training Loss: 1.062251
+Val Loss: 2.4047 | C-index: 0.6702
+
+Epoch 3
+-------------------------------
+loss: 3.396750  [   64/  678]
+loss: 3.140990  [  256/  678]
+loss: 3.040466  [  448/  678]
+loss: 3.118350  [  640/  678]
+Average Training Loss: 1.154232
+Val Loss: 2.3915 | C-index: 0.6710
+
+Epoch 4
+-------------------------------
+loss: 2.732584  [   64/  678]
+loss: 2.712342  [  256/  678]
+loss: 2.808506  [  448/  678]
+loss: 3.315414  [  640/  678]
+Average Training Loss: 1.051713
+Val Loss: 2.3795 | C-index: 0.6710
+
+Epoch 5
+-------------------------------
+loss: 3.230640  [   64/  678]
+loss: 3.142348  [  256/  678]
+loss: 2.733841  [  448/  678]
+loss: 3.155822  [  640/  678]
+Average Training Loss: 1.114787
+Val Loss: 2.3687 | C-index: 0.6710
+
+Epoch 6
+-------------------------------
+loss: 3.247623  [   64/  678]
+loss: 2.681340  [  256/  678]
+loss: 2.904329  [  448/  678]
+loss: 2.659204  [  640/  678]
+Average Training Loss: 1.044772
+Val Loss: 2.3544 | C-index: 0.6694
+
+Epoch 7
+-------------------------------
+loss: 3.061696  [   64/  678]
+loss: 3.008130  [  256/  678]
+loss: 2.974358  [  448/  678]
+loss: 2.878063  [  640/  678]
+Average Training Loss: 1.083841
+Val Loss: 2.3441 | C-index: 0.6694
+
+Epoch 8
+-------------------------------
+loss: 2.903144  [   64/  678]
+loss: 3.444434  [  256/  678]
+loss: 2.823364  [  448/  678]
+loss: 3.301848  [  640/  678]
+Average Training Loss: 1.133890
+Val Loss: 2.3335 | C-index: 0.6710
+
+Stopping early at Epoch 8 since no C-Index improvement after 5 epochs.
+Done!
+Best C-Index = 0.6709677419354839 at Epoch 3
+
+=========================================
+FOLD 4/5
+=========================================
+
+Epoch 1
+-------------------------------
+loss: 3.040464  [   64/  678]
+loss: 2.945486  [  256/  678]
+loss: 3.049092  [  448/  678]
+loss: 3.204511  [  640/  678]
+Average Training Loss: 1.112687
+Val Loss: 3.1423 | C-index: 0.6655
+
+Epoch 2
+-------------------------------
+loss: 2.928974  [   64/  678]
+loss: 2.427930  [  256/  678]
+loss: 3.240380  [  448/  678]
+loss: 2.846238  [  640/  678]
+Average Training Loss: 1.040320
+Val Loss: 3.1351 | C-index: 0.6569
+
+Epoch 3
+-------------------------------
+loss: 3.134982  [   64/  678]
+loss: 2.889676  [  256/  678]
+loss: 2.803961  [  448/  678]
+loss: 2.873580  [  640/  678]
+Average Training Loss: 1.063836
+Val Loss: 3.1274 | C-index: 0.6650
+
+Epoch 4
+-------------------------------
+loss: 3.251451  [   64/  678]
+loss: 3.395312  [  256/  678]
+loss: 3.063662  [  448/  678]
+loss: 2.539075  [  640/  678]
+Average Training Loss: 1.113591
+Val Loss: 3.1212 | C-index: 0.6617
+
+Epoch 5
+-------------------------------
+loss: 3.168902  [   64/  678]
+loss: 3.371588  [  256/  678]
+loss: 3.189542  [  448/  678]
+loss: 3.017046  [  640/  678]
+Average Training Loss: 1.158825
+Val Loss: 3.1096 | C-index: 0.6623
+
+Epoch 6
+-------------------------------
+loss: 2.842965  [   64/  678]
+loss: 2.755273  [  256/  678]
+loss: 3.340778  [  448/  678]
+loss: 2.967689  [  640/  678]
+Average Training Loss: 1.082428
+Val Loss: 3.1050 | C-index: 0.6633
+
+Stopping early at Epoch 6 since no C-Index improvement after 5 epochs.
+Done!
+Best C-Index = 0.6655005382131324 at Epoch 1
+
+=========================================
+FOLD 5/5
+=========================================
+
+Epoch 1
+-------------------------------
+loss: 3.187600  [   64/  678]
+loss: 3.015822  [  256/  678]
+loss: 2.769783  [  448/  678]
+loss: 3.246876  [  640/  678]
+Average Training Loss: 1.110916
+Val Loss: 2.5553 | C-index: 0.6003
+
+Epoch 2
+-------------------------------
+loss: 3.037904  [   64/  678]
+loss: 2.189338  [  256/  678]
+loss: 3.270679  [  448/  678]
+loss: 3.390474  [  640/  678]
+Average Training Loss: 1.080763
+Val Loss: 2.5496 | C-index: 0.5777
+
+Epoch 3
+-------------------------------
+loss: 3.269933  [   64/  678]
+loss: 2.786725  [  256/  678]
+loss: 1.620796  [  448/  678]
+loss: 3.215219  [  640/  678]
+Average Training Loss: 0.990243
+Val Loss: 2.5457 | C-index: 0.5860
+
+Epoch 4
+-------------------------------
+loss: 3.283694  [   64/  678]
+loss: 2.974313  [  256/  678]
+loss: 2.822737  [  448/  678]
+loss: 2.927193  [  640/  678]
+Average Training Loss: 1.091631
+Val Loss: 2.5417 | C-index: 0.5839
+
+Epoch 5
+-------------------------------
+loss: 2.824467  [   64/  678]
+loss: 3.410286  [  256/  678]
+loss: 2.928317  [  448/  678]
+loss: 3.125217  [  640/  678]
+Average Training Loss: 1.117117
+Val Loss: 2.5399 | C-index: 0.5839
+
+Epoch 6
+-------------------------------
+loss: 3.368283  [   64/  678]
+loss: 2.893937  [  256/  678]
+loss: 3.044791  [  448/  678]
+loss: 3.150716  [  640/  678]
+Average Training Loss: 1.132521
+Val Loss: 2.5364 | C-index: 0.5812
+
+Stopping early at Epoch 6 since no C-Index improvement after 5 epochs.
+Done!
+Best C-Index = 0.6003424657534246 at Epoch 1
+
+=========================================
+CV training complete! Mean ± std C-index: 0.6898 ± 0.0614
+Best epochs per fold: [12, 1, 3, 1, 1]
+
+=========================================
+Retraining model on full train+val for 4 epochs...
+Epoch 1
+-------------------------------
+loss: 3.592912  [   64/  847]
+loss: 3.067361  [  320/  847]
+loss: 1.947653  [  576/  847]
+loss: 3.128179  [  832/  847]
+Average Training Loss: 0.838293
+Val Loss: 2.8590 | C-index: 0.6723
+
+Epoch 2
+-------------------------------
+loss: 3.138519  [   64/  847]
+loss: 2.579417  [  320/  847]
+loss: 3.217411  [  576/  847]
+loss: 3.192528  [  832/  847]
+Average Training Loss: 0.866277
+Val Loss: 2.8447 | C-index: 0.6825
+
+Epoch 3
+-------------------------------
+loss: 2.660759  [   64/  847]
+loss: 3.145700  [  320/  847]
+loss: 3.301830  [  576/  847]
+loss: 2.736426  [  832/  847]
+Average Training Loss: 0.846051
+Val Loss: 2.8091 | C-index: 0.6813
+
+Epoch 4
+-------------------------------
+loss: 2.845707  [   64/  847]
+loss: 3.174215  [  320/  847]
+loss: 3.284009  [  576/  847]
+loss: 2.374011  [  832/  847]
+Average Training Loss: 0.834139
+Val Loss: 2.9161 | C-index: 0.6827
+
+Done!
+Best C-Index = 0.6826573526267018 at Epoch 4
+FINAL TEST Average Loss: 2.5841
+FINAL TEST C-index: 0.6136
+Bootstrap 95% CI: [0.4749, 0.7501]
+Results saved to /Users/evan/Documents/GitHub/HyBINN/experiments/runs/clinical_only/seed_2/results.json

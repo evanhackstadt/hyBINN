@@ -1,0 +1,41 @@
+{
+  "model": [
+    "gene"
+  ],
+  "seed": 7,
+  "n_trainval": 847,
+  "n_test": 212,
+  "cv_mean_cindex": 0.7243866689271868,
+  "cv_std_cindex": 0.01584851016128696,
+  "mean_best_epoch": 10,
+  "fold_cindices": [
+    0.7282958199356914,
+    0.7286288009179576,
+    0.7494432071269488,
+    0.7124405166553365,
+    0.703125
+  ],
+  "fold_best_epochs": [
+    9,
+    6,
+    10,
+    14,
+    9
+  ],
+  "retrain_mean_cindex": 0.9013038400114415,
+  "retrain_std_cindex": 0.08132187639832379,
+  "test_cindex": 0.6266666666666667,
+  "test_loss": 2.874734878540039,
+  "bootstrap_ci": {
+    "mean": 0.627093482557028,
+    "std": 0.06151324322155807,
+    "lower": 0.5062816863867827,
+    "upper": 0.7463805079332934,
+    "n_bootstrap": 1000,
+    "n_valid": 1000,
+    "ci_level": 0.95
+  },
+  "branch_weights": {
+    "gene": 1.0
+  }
+}

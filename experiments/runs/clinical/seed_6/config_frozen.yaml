@@ -1,0 +1,31 @@
+data:
+  batch_size: 64
+  clinical_data_path: /Users/evan/Documents/GitHub/HyBINN/data/processed/clinical_data.csv
+  gene_data_path: /Users/evan/Documents/GitHub/HyBINN/data/processed/gene_data.csv
+  random_seed: 6
+  reactome_path: /Users/evan/Documents/GitHub/HyBINN/data/reactome/Ensembl2Reactome_All_Levels.txt
+  test: 0.2
+  train: 0.6
+  val: 0.2
+logging:
+  run_dir: /Users/evan/Documents/GitHub/HyBINN/experiments/runs/clinical_only/seed_6
+  run_name: clinical_only
+model:
+  binn:
+    hidden_nodes: 128
+    pathway_nodes: 400
+  branches:
+  - clinical
+  clinical:
+    hidden_nodes_1: 8
+    hidden_nodes_2: 8
+  embedding_dim: 1
+  gene:
+    hidden_nodes_1: 1024
+    hidden_nodes_2: 256
+training:
+  early_stopping_patience: 5
+  epochs: 50
+  folds: 5
+  lr: 0.001
+  weight_decay: 0.001

@@ -1,8 +1,11 @@
 # DATA
 data/
 
-# RESULTS FOR NOW
-runs/
+# LARGE RESULTS FILES
+*.pt
+kaplan_meier_binn_per_seed/
+kaplan_meier_hybinn_per_seed/
+*old*
 
 # MISC
 .vscode

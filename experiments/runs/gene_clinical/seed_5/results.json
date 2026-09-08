@@ -1,0 +1,43 @@
+{
+  "model": [
+    "gene",
+    "clinical"
+  ],
+  "seed": 5,
+  "n_trainval": 847,
+  "n_test": 212,
+  "cv_mean_cindex": 0.6914865897795094,
+  "cv_std_cindex": 0.05625973132961916,
+  "mean_best_epoch": 8,
+  "fold_cindices": [
+    0.753004005340454,
+    0.5991735537190083,
+    0.65625,
+    0.7315010570824524,
+    0.7175043327556326
+  ],
+  "fold_best_epochs": [
+    5,
+    5,
+    13,
+    13,
+    5
+  ],
+  "retrain_mean_cindex": 0.8671793787018011,
+  "retrain_std_cindex": 0.12408542715846717,
+  "test_cindex": 0.7090620031796503,
+  "test_loss": 2.789956510066986,
+  "bootstrap_ci": {
+    "mean": 0.7068926799182825,
+    "std": 0.05501152554078801,
+    "lower": 0.5921876106473213,
+    "upper": 0.8071585051708322,
+    "n_bootstrap": 1000,
+    "n_valid": 1000,
+    "ci_level": 0.95
+  },
+  "branch_weights": {
+    "gene": 0.542079508304596,
+    "clinical": 0.45792049169540405
+  }
+}

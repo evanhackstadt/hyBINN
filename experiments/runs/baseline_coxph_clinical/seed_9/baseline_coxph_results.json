@@ -1,0 +1,16 @@
+{
+  "models": [
+    {
+      "model": "clinical",
+      "n_features": 3,
+      "n_train": 847,
+      "n_test": 212,
+      "c_index": 0.5315135375055482,
+      "coefficients": {
+        "t_stage": 0.16832517839582697,
+        "n_stage": 0.061038137981057915,
+        "m_stage": 0.9755333492333225
+      }
+    }
+  ]
+}

@@ -1,0 +1,82 @@
+config_A,config_B,p_raw,p_holm,significant
+BINN,Gene MLP,0.322266,1.0,False
+BINN,Clinical,0.105469,1.0,False
+BINN,BINN + Gene,0.232422,1.0,False
+BINN,BINN + Clinical,0.845703,1.0,False
+BINN,Gene + Clinical,0.375,1.0,False
+BINN,"Full HyBINN
+(all branches)",0.431641,1.0,False
+BINN,"Baseline CoxPH
+(gene)",0.921875,1.0,False
+BINN,"Baseline CoxPH
+(clinical)",0.695312,1.0,False
+BINN,"Baseline CoxPH
+(combined)",0.105469,1.0,False
+Gene MLP,Clinical,0.431641,1.0,False
+Gene MLP,BINN + Gene,0.695312,1.0,False
+Gene MLP,BINN + Clinical,0.492188,1.0,False
+Gene MLP,Gene + Clinical,0.431641,1.0,False
+Gene MLP,"Full HyBINN
+(all branches)",0.769531,1.0,False
+Gene MLP,"Baseline CoxPH
+(gene)",0.375,1.0,False
+Gene MLP,"Baseline CoxPH
+(clinical)",0.625,1.0,False
+Gene MLP,"Baseline CoxPH
+(combined)",0.003906,0.175781,False
+Clinical,BINN + Gene,0.625,1.0,False
+Clinical,BINN + Clinical,0.128906,1.0,False
+Clinical,Gene + Clinical,0.845703,1.0,False
+Clinical,"Full HyBINN
+(all branches)",0.492188,1.0,False
+Clinical,"Baseline CoxPH
+(gene)",0.275391,1.0,False
+Clinical,"Baseline CoxPH
+(clinical)",0.130859,1.0,False
+Clinical,"Baseline CoxPH
+(combined)",0.083984,1.0,False
+BINN + Gene,BINN + Clinical,0.492188,1.0,False
+BINN + Gene,Gene + Clinical,0.556641,1.0,False
+BINN + Gene,"Full HyBINN
+(all branches)",0.921875,1.0,False
+BINN + Gene,"Baseline CoxPH
+(gene)",0.322266,1.0,False
+BINN + Gene,"Baseline CoxPH
+(clinical)",1.0,1.0,False
+BINN + Gene,"Baseline CoxPH
+(combined)",0.013672,0.601562,False
+BINN + Clinical,Gene + Clinical,0.232422,1.0,False
+BINN + Clinical,"Full HyBINN
+(all branches)",0.556641,1.0,False
+BINN + Clinical,"Baseline CoxPH
+(gene)",0.769531,1.0,False
+BINN + Clinical,"Baseline CoxPH
+(clinical)",0.556641,1.0,False
+BINN + Clinical,"Baseline CoxPH
+(combined)",0.275391,1.0,False
+Gene + Clinical,"Full HyBINN
+(all branches)",0.625,1.0,False
+Gene + Clinical,"Baseline CoxPH
+(gene)",0.232422,1.0,False
+Gene + Clinical,"Baseline CoxPH
+(clinical)",0.160156,1.0,False
+Gene + Clinical,"Baseline CoxPH
+(combined)",0.019531,0.820312,False
+"Full HyBINN
+(all branches)","Baseline CoxPH
+(gene)",0.322266,1.0,False
+"Full HyBINN
+(all branches)","Baseline CoxPH
+(clinical)",0.845703,1.0,False
+"Full HyBINN
+(all branches)","Baseline CoxPH
+(combined)",0.048828,1.0,False
+"Baseline CoxPH
+(gene)","Baseline CoxPH
+(clinical)",0.625,1.0,False
+"Baseline CoxPH
+(gene)","Baseline CoxPH
+(combined)",0.013672,0.601562,False
+"Baseline CoxPH
+(clinical)","Baseline CoxPH
+(combined)",0.083984,1.0,False

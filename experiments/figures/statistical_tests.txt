@@ -1,0 +1,58 @@
+============================================================
+Omnibus: Friedman Test
+  χ²(9) = 12.9891,  p = 0.1631
+  n = 10 paired seeds
+
+  NOTE: Omnibus test not significant (p ≥ 0.05).
+  Pairwise tests reported for completeness; interpret cautiously.
+
+Pairwise: Wilcoxon Signed-Rank (Holm-corrected)
+------------------------------------------------------------
+                   config_A                    config_B    p_raw   p_holm  significant
+                       BINN                    Gene MLP 0.322266 1.000000        False
+                       BINN                    Clinical 0.105469 1.000000        False
+                       BINN                 BINN + Gene 0.232422 1.000000        False
+                       BINN             BINN + Clinical 0.845703 1.000000        False
+                       BINN             Gene + Clinical 0.375000 1.000000        False
+                       BINN Full HyBINN\n(all branches) 0.431641 1.000000        False
+                       BINN      Baseline CoxPH\n(gene) 0.921875 1.000000        False
+                       BINN  Baseline CoxPH\n(clinical) 0.695312 1.000000        False
+                       BINN  Baseline CoxPH\n(combined) 0.105469 1.000000        False
+                   Gene MLP                    Clinical 0.431641 1.000000        False
+                   Gene MLP                 BINN + Gene 0.695312 1.000000        False
+                   Gene MLP             BINN + Clinical 0.492188 1.000000        False
+                   Gene MLP             Gene + Clinical 0.431641 1.000000        False
+                   Gene MLP Full HyBINN\n(all branches) 0.769531 1.000000        False
+                   Gene MLP      Baseline CoxPH\n(gene) 0.375000 1.000000        False
+                   Gene MLP  Baseline CoxPH\n(clinical) 0.625000 1.000000        False
+                   Gene MLP  Baseline CoxPH\n(combined) 0.003906 0.175781        False
+                   Clinical                 BINN + Gene 0.625000 1.000000        False
+                   Clinical             BINN + Clinical 0.128906 1.000000        False
+                   Clinical             Gene + Clinical 0.845703 1.000000        False
+                   Clinical Full HyBINN\n(all branches) 0.492188 1.000000        False
+                   Clinical      Baseline CoxPH\n(gene) 0.275391 1.000000        False
+                   Clinical  Baseline CoxPH\n(clinical) 0.130859 1.000000        False
+                   Clinical  Baseline CoxPH\n(combined) 0.083984 1.000000        False
+                BINN + Gene             BINN + Clinical 0.492188 1.000000        False
+                BINN + Gene             Gene + Clinical 0.556641 1.000000        False
+                BINN + Gene Full HyBINN\n(all branches) 0.921875 1.000000        False
+                BINN + Gene      Baseline CoxPH\n(gene) 0.322266 1.000000        False
+                BINN + Gene  Baseline CoxPH\n(clinical) 1.000000 1.000000        False
+                BINN + Gene  Baseline CoxPH\n(combined) 0.013672 0.601562        False
+            BINN + Clinical             Gene + Clinical 0.232422 1.000000        False
+            BINN + Clinical Full HyBINN\n(all branches) 0.556641 1.000000        False
+            BINN + Clinical      Baseline CoxPH\n(gene) 0.769531 1.000000        False
+            BINN + Clinical  Baseline CoxPH\n(clinical) 0.556641 1.000000        False
+            BINN + Clinical  Baseline CoxPH\n(combined) 0.275391 1.000000        False
+            Gene + Clinical Full HyBINN\n(all branches) 0.625000 1.000000        False
+            Gene + Clinical      Baseline CoxPH\n(gene) 0.232422 1.000000        False
+            Gene + Clinical  Baseline CoxPH\n(clinical) 0.160156 1.000000        False
+            Gene + Clinical  Baseline CoxPH\n(combined) 0.019531 0.820312        False
+Full HyBINN\n(all branches)      Baseline CoxPH\n(gene) 0.322266 1.000000        False
+Full HyBINN\n(all branches)  Baseline CoxPH\n(clinical) 0.845703 1.000000        False
+Full HyBINN\n(all branches)  Baseline CoxPH\n(combined) 0.048828 1.000000        False
+     Baseline CoxPH\n(gene)  Baseline CoxPH\n(clinical) 0.625000 1.000000        False
+     Baseline CoxPH\n(gene)  Baseline CoxPH\n(combined) 0.013672 0.601562        False
+ Baseline CoxPH\n(clinical)  Baseline CoxPH\n(combined) 0.083984 1.000000        False
+
+============================================================
