@@ -51,16 +51,20 @@ from lifelines.statistics import logrank_test
 
 # Display labels and plot order for each model configuration
 CONFIG_ORDER = ["binn", "gene", "clinical",
-                "binn_gene", "binn_clinical", "gene_clinical", "full_hybinn"]
+                "binn_gene", "binn_clinical", "gene_clinical", "full_hybinn",
+                "baseline_coxph_gene", "baseline_coxph_clinical", "baseline_coxph_combined"]
 
 CONFIG_LABELS = {
-    "binn":          "BINN",
-    "gene":          "Gene MLP",
-    "clinical":      "Clinical",
-    "binn_gene":     "BINN + Gene",
-    "binn_clinical": "BINN + Clinical",
-    "gene_clinical": "Gene + Clinical",
-    "full_hybinn":   "Full HyBINN\n(all branches)",
+    "binn":                    "BINN",
+    "gene":                    "Gene MLP",
+    "clinical":                "Clinical",
+    "binn_gene":               "BINN + Gene",
+    "binn_clinical":           "BINN + Clinical",
+    "gene_clinical":           "Gene + Clinical",
+    "full_hybinn":             "Full HyBINN",
+    "baseline_coxph_gene":     "Baseline CoxPH\n(gene)",
+    "baseline_coxph_clinical": "Baseline CoxPH\n(clinical)",
+    "baseline_coxph_combined": "Baseline CoxPH\n(combined)",
 }
 
 # Seaborn palette — one colour per config, consistent across all figures
@@ -74,6 +78,7 @@ ALL_TASKS = [
     "km_3group",
     "pathway_rankings",
     "pathway_barplot",
+    "statistical_tests"
 ]
 TASK_ALIASES = {
     "all": ALL_TASKS,
@@ -98,6 +103,10 @@ def is_enabled(task, enabled_tasks):
     return task in enabled_tasks
 
 
+# legacy top-level baseline loader removed; baseline CoxPH results are stored
+# per-seed in `runs/baseline_coxph_<variant>/seed_<n>/baseline_coxph_results.json`.
+
+
 # ── Loaders ─────────────────────────────────────────────────────────────────
 
 def load_all_results(runs_dir, configs=None):
@@ -115,34 +124,64 @@ def load_all_results(runs_dir, configs=None):
             continue
 
         for seed_dir in sorted(os.listdir(model_dir)):
-            path = os.path.join(model_dir, seed_dir, "results.json")
-            if not os.path.exists(path):
-                print(f"  [MISSING] {cfg_name}/{seed_dir}/results.json")
+            results_path = os.path.join(model_dir, seed_dir, "results.json")
+
+            if os.path.exists(results_path):
+                with open(results_path) as f:
+                    r = json.load(f)
+
+                row = {
+                    "config":           cfg_name,
+                    "seed_dir":         seed_dir,
+                    "seed":             r.get("seed"),
+                    "test_cindex":      r.get("test_cindex"),
+                    "cv_mean_cindex":   r.get("cv_mean_cindex"),
+                    "boot_lower":       (r.get("bootstrap_ci") or {}).get("lower"),
+                    "boot_upper":       (r.get("bootstrap_ci") or {}).get("upper"),
+                    "boot_mean":        (r.get("bootstrap_ci") or {}).get("mean"),
+                    "n_test":           r.get("n_test"),
+                    "top_pathways":     r.get("top_pathways", {}),
+                }
+
+                # Branch weights, if saved
+                for branch, w in (r.get("branch_weights") or {}).items():
+                    row[f"weight_{branch}"] = w
+
+                records.append(row)
                 continue
 
-            with open(path) as f:
-                r = json.load(f)
+            # If no standard results.json, check for baseline CoxPH per-seed JSON
+            alt_path = os.path.join(model_dir, seed_dir, "baseline_coxph_results.json")
+            if os.path.exists(alt_path):
+                with open(alt_path) as f:
+                    data = json.load(f)
 
-            row = {
-                "config":           cfg_name,
-                "seed_dir":         seed_dir,
-                "seed":             r.get("seed"),
-                "test_cindex":      r.get("test_cindex"),
-                "cv_mean_cindex":   r.get("cv_mean_cindex"),
-                "boot_lower":       (r.get("bootstrap_ci") or {}).get("lower"),
-                "boot_upper":       (r.get("bootstrap_ci") or {}).get("upper"),
-                "boot_mean":        (r.get("bootstrap_ci") or {}).get("mean"),
-                "n_test":           r.get("n_test"),
-                "top_pathways":     r.get("top_pathways", {}),
-            }
+                models = data.get("models", [])
+                if models:
+                    m = models[0]
+                    try:
+                        seed_val = int(seed_dir.replace("seed_", ""))
+                    except Exception:
+                        seed_val = m.get("model")
 
-            # Branch weights, if saved
-            for branch, w in (r.get("branch_weights") or {}).items():
-                row[f"weight_{branch}"] = w
-
-            records.append(row)
+                    row = {
+                        "config":           cfg_name,
+                        "seed_dir":         seed_dir,
+                        "seed":             seed_val,
+                        "test_cindex":      m.get("c_index", m.get("test_cindex")),
+                        "cv_mean_cindex":   None,
+                        "boot_lower":       None,
+                        "boot_upper":       None,
+                        "boot_mean":        None,
+                        "n_test":           m.get("n_test"),
+                        "top_pathways":     {},
+                    }
+                    records.append(row)
+            else:
+                print(f"  [MISSING] {cfg_name}/{seed_dir}/results.json")
 
     df = pd.DataFrame(records)
+
     print(f"\nLoaded {len(df)} runs across {df['config'].nunique()} configs.")
     return df
 
@@ -228,11 +267,6 @@ def make_boxplot(results_df, out_dir):
     """
     Box-and-whisker of test C-index across seeds, one box per model config.
     Each point is one (config, seed) test C-index — n=10 per box.
-
-    Why seeds, not bootstrap resamples?
-    Bootstrap CI answers: "how uncertain is our estimate of this model's C-index
-    given this test set?" Seed variance answers: "how stable is training?" They
-    are complementary. This plot shows the latter.
     """
     # Filter to configs present in data, preserve CONFIG_ORDER
     present = [c for c in CONFIG_ORDER if c in results_df["config"].values]
@@ -240,7 +274,7 @@ def make_boxplot(results_df, out_dir):
     plot_df["config"] = pd.Categorical(plot_df["config"], categories=present, ordered=True)
     plot_df = plot_df.sort_values("config")
 
-    fig, ax = plt.subplots(figsize=(10, 5))
+    fig, ax = plt.subplots(figsize=(12, 6))
 
     # Draw boxes
     bp = ax.boxplot(
@@ -267,7 +301,7 @@ def make_boxplot(results_df, out_dir):
 
     ax.set_xticks(range(1, len(present) + 1))
     ax.set_xticklabels([CONFIG_LABELS.get(c, c) for c in present],
-                       fontsize=9, rotation=15, ha="right")
+                       fontsize=9, rotation=30, ha="right")
     ax.set_ylabel("Test C-index", fontsize=11)
     # ax.set_title("Test C-index across 10 random seeds — HyBINN ablation", fontsize=12)
     ax.axhline(0.5, color="gray", linestyle="--", linewidth=1, label="Random (0.5)")
@@ -297,7 +331,6 @@ def make_km_plot_binary(predictions_df, out_dir, label="Full HyBINN"):
     df = predictions_df[["risk_final", "time", "event"]].dropna()
 
     threshold = df["risk_final"].median()
-    split_label = "median"
 
     high_risk = df[df["risk_final"] >= threshold]
     low_risk  = df[df["risk_final"] <  threshold]
@@ -356,7 +389,7 @@ def make_km_plot_binary(predictions_df, out_dir, label="Full HyBINN"):
 
     ax.set_xlabel("Time (days)", fontsize=11)
     ax.set_ylabel("Survival probability", fontsize=11)
-    ax.set_title(f"Kaplan-Meier — {label}\n(split on {split_label} risk score)", fontsize=11)
+    ax.set_title(f"Kaplan-Meier (split on median risk score)\n{label}", fontsize=11)
     ax.set_ylim(0, 1.05)
     ax.legend(fontsize=9, loc="lower left")
     ax.grid(which="major", linestyle="--", alpha=0.3)
@@ -455,7 +488,7 @@ def make_km_plot_3group(predictions_df, out_dir, label="Full HyBINN"):
 
     ax.set_xlabel("Time (days)", fontsize=11)
     ax.set_ylabel("Survival probability", fontsize=11)
-    ax.set_title(f"Kaplan-Meier (tertile split) — {label}", fontsize=11)
+    ax.set_title(f"Kaplan-Meier (tertile split)\n{label}", fontsize=11)
     ax.set_ylim(0, 1.05)
     ax.legend(fontsize=9, loc="lower left")
     ax.grid(which="major", linestyle="--", alpha=0.3)
@@ -468,8 +501,10 @@ def make_km_plot_3group(predictions_df, out_dir, label="Full HyBINN"):
     print(f"  3-group KM saved → {out_path}")
 
 
-# ── 4. Pathway Analysis ──────────────────────────────────────────────────────
+# ── 4. OLD Pathway Analysis ──────────────────────────────────────────────────────
+# based on mean activation; replaced by integrated gradients in pathway_attribution.py
 
+'''
 def build_reactome_name_map(reactome_path):
     """
     Reads the Ensembl2Reactome TSV and returns {ReactomePathwayID: PathwayName}.
@@ -571,6 +606,132 @@ def make_pathway_barplot(pathway_df, out_dir, top_n=20):
     fig.savefig(out_path, dpi=200, bbox_inches="tight")
     plt.close(fig)
     print(f"Pathway bar plot saved → {out_path}")
+'''
+
+
+# ── 5. Statistical Tests ─────────────────────────────────────────────────────
+
+def make_statistical_tests(results_df, out_dir):
+    """
+    Friedman test across all model configs, followed by pairwise Wilcoxon
+    signed-rank post-hoc tests with Holm correction if omnibus p < 0.05.
+
+    Uses seed as the blocking variable (paired across configs), since the same
+    seed index produces the same train/test split for all configurations.
+
+    Saves:
+        statistical_tests.txt     — omnibus result + pairwise table
+        pairwise_pvalues.csv      — raw and corrected p-values
+        pairwise_heatmap.png      — heatmap of corrected p-values
+    """
+    from scipy import stats
+    from statsmodels.stats.multitest import multipletests
+    from itertools import combinations
+
+    # ── Build [seeds x configs] matrix ───────────────────────────────────────
+    present_configs = [c for c in CONFIG_ORDER if c in results_df["config"].values]
+
+    pivot = (
+        results_df[results_df["config"].isin(present_configs)]
+        .pivot(index="seed", columns="config", values="test_cindex")
+        [present_configs]   # enforce CONFIG_ORDER column order
+        .dropna()
+    )
+
+    n_seeds, n_configs = pivot.shape
+    print(f"\n  Paired matrix: {n_seeds} seeds × {n_configs} configs")
+
+    # ── Friedman test ─────────────────────────────────────────────────────────
+    friedman_stat, friedman_p = stats.friedmanchisquare(*[pivot[c].values for c in present_configs])
+    print(f"  Friedman χ²({n_configs - 1}) = {friedman_stat:.4f}, p = {friedman_p:.4f}")
+
+    lines = [
+        "=" * 60,
+        "Omnibus: Friedman Test",
+        f"  χ²({n_configs - 1}) = {friedman_stat:.4f},  p = {friedman_p:.4f}",
+        f"  n = {n_seeds} paired seeds",
+        "",
+    ]
+
+    # ── Pairwise Wilcoxon signed-rank (always run, flag if omnibus NS) ────────
+    if friedman_p >= 0.05:
+        lines.append("  NOTE: Omnibus test not significant (p ≥ 0.05).")
+        lines.append("  Pairwise tests reported for completeness; interpret cautiously.")
+    lines += ["", "Pairwise: Wilcoxon Signed-Rank (Holm-corrected)", "-" * 60]
+
+    pairs = list(combinations(present_configs, 2))
+    raw_p = []
+    for a, b in pairs:
+        _, p = stats.wilcoxon(pivot[a].values, pivot[b].values)
+        raw_p.append(p)
+
+    reject, p_corrected, _, _ = multipletests(raw_p, method="holm")
+
+    records = []
+    for (a, b), p_raw, p_corr, rej in zip(pairs, raw_p, p_corrected, reject):
+        records.append({
+            "config_A":    CONFIG_LABELS.get(a, a),
+            "config_B":    CONFIG_LABELS.get(b, b),
+            "p_raw":       round(p_raw, 6),
+            "p_holm":      round(p_corr, 6),
+            "significant": rej,
+        })
+
+    pairs_df = pd.DataFrame(records)
+    pairs_df_str = pairs_df.to_string(index=False)
+    lines.append(pairs_df_str)
+    lines += ["", "=" * 60]
+
+    report = "\n".join(lines)
+    print("\n" + report)
+
+    # ── Save text report ──────────────────────────────────────────────────────
+    txt_path = os.path.join(out_dir, "statistical_tests.txt")
+    with open(txt_path, "w") as f:
+        f.write(report)
+    print(f"\n  Statistical test report → {txt_path}")
+
+    # ── Save pairwise CSV ─────────────────────────────────────────────────────
+    csv_path = os.path.join(out_dir, "pairwise_pvalues.csv")
+    pairs_df.to_csv(csv_path, index=False)
+    print(f"  Pairwise p-values → {csv_path}")
+
+    # ── Heatmap of Holm-corrected p-values ────────────────────────────────────
+    labels = [CONFIG_LABELS.get(c, c) for c in present_configs]
+    n = len(labels)
+    matrix = np.ones((n, n))
+
+    for (a, b), p_corr in zip(pairs, p_corrected):
+        i = present_configs.index(a)
+        j = present_configs.index(b)
+        matrix[i, j] = p_corr
+        matrix[j, i] = p_corr
+
+    fig, ax = plt.subplots(figsize=(8, 6))
+    im = ax.imshow(matrix, vmin=0, vmax=1, cmap="RdYlGn_r")
+    cbar = fig.colorbar(im, ax=ax, shrink=0.8)
+    cbar.set_label("Holm-corrected p-value", fontsize=9)
+
+    ax.set_xticks(range(n)); ax.set_xticklabels(labels, rotation=35, ha="right", fontsize=8)
+    ax.set_yticks(range(n)); ax.set_yticklabels(labels, fontsize=8)
+
+    for i in range(n):
+        for j in range(n):
+            if i == j:
+                continue
+            txt = f"{matrix[i,j]:.3f}"
+            color = "white" if matrix[i, j] < 0.3 else "black"
+            ax.text(j, i, txt, ha="center", va="center", fontsize=7, color=color)
+
+    ax.set_title("Pairwise Wilcoxon p-values (Holm-corrected)", fontsize=11)
+    plt.tight_layout()
+    heatmap_path = os.path.join(out_dir, "pairwise_heatmap.png")
+    fig.savefig(heatmap_path, dpi=200, bbox_inches="tight")
+    plt.close(fig)
+    print(f"  Heatmap → {heatmap_path}")
+
+    return pairs_df
+
 
 
 # ── CLI ──────────────────────────────────────────────────────────────────────
@@ -664,6 +825,10 @@ def main():
             if pathway_df is not None and is_enabled("pathway_barplot"):
                 make_pathway_barplot(pathway_df, args.out_dir, top_n=20)
 
+    if is_enabled("statistical_tests", args.tasks):
+        print("\n── 5. Statistical Tests ──")
+        make_statistical_tests(results_df, args.out_dir)
+    
     print("\n── Done ──")
     print(f"All outputs saved to: {os.path.abspath(args.out_dir)}")
 

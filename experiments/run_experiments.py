@@ -29,12 +29,17 @@ ALL_CONFIGS = {
     "binn_clinical": ["binn", "clinical"],
     "gene_clinical": ["gene", "clinical"],
     "full_hybinn":   ["binn", "gene", "clinical"],
+    # Baseline CoxPH broken out into explicit configs to match HyBINN structure
+    "baseline_coxph_gene":      [],
+    "baseline_coxph_clinical":  [],
+    "baseline_coxph_combined":  [],
 }
 
 ALL_SEEDS = list(range(10))
 
 BASE_RUN_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "runs"))
 TRAIN_SCRIPT = os.path.join(os.path.dirname(__file__), "train_hybinn.py")
+TRAIN_COXPH = os.path.join(os.path.dirname(__file__), "train_coxph.py")
 
 
 # ---- Runner ----
@@ -42,21 +47,39 @@ TRAIN_SCRIPT = os.path.join(os.path.dirname(__file__), "train_hybinn.py")
 def run_one(model_name, branches, seed, dry_run=False):
     run_dir = os.path.join(BASE_RUN_DIR, model_name, f"seed_{seed}")
 
-    # Skip if results.json already exists (allows resuming interrupted runs)
-    results_path = os.path.join(run_dir, "results.json")
-    if os.path.exists(results_path):
-        print(f"  [SKIP] {model_name}/seed_{seed} — results.json already exists")
-        return True
+    # Baseline CoxPH variants: use train_coxph.py and save baseline_coxph_results.json per-seed
+    if model_name.startswith("baseline_coxph"):
+        results_path = os.path.join(run_dir, "baseline_coxph_results.json")
+        if os.path.exists(results_path):
+            print(f"  [SKIP] {model_name}/seed_{seed} — baseline_coxph_results.json already exists")
+            return True
+    else:
+        # Skip if results.json already exists (allows resuming interrupted runs)
+        results_path = os.path.join(run_dir, "results.json")
+        if os.path.exists(results_path):
+            print(f"  [SKIP] {model_name}/seed_{seed} — results.json already exists")
+            return True
 
     os.makedirs(run_dir, exist_ok=True)
 
-    cmd = [
-        sys.executable, TRAIN_SCRIPT,
-        "--branches", *branches,
-        "--seed",     str(seed),
-        "--run_dir",  run_dir,
-        "--run_name", model_name,
-    ]
+    if model_name.startswith("baseline_coxph"):
+        # train_coxph accepts --models, --random_seed and --output_dir
+        # model_name e.g. baseline_coxph_gene -> model_variant = 'gene'
+        model_variant = model_name.replace("baseline_coxph_", "")
+        cmd = [
+            sys.executable, TRAIN_COXPH,
+            "--models", model_variant,
+            "--random_seed", str(seed),
+            "--output_dir", run_dir,
+        ]
+    else:
+        cmd = [
+            sys.executable, TRAIN_SCRIPT,
+            "--branches", *branches,
+            "--seed",     str(seed),
+            "--run_dir",  run_dir,
+            "--run_name", model_name,
+        ]
 
     print(f"  [RUN]  {model_name}/seed_{seed}")
     if dry_run:
