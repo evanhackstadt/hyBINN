@@ -811,6 +811,7 @@ def main():
             print("  Tip: ensure predictions_test.csv exists in your run directories,")
             print("       or pass --predictions path/to/predictions_test.csv")
 
+    '''
     if any(is_enabled(t, args.tasks) for t in ("pathway_rankings", "pathway_barplot")):
         print("\n── 4. Pathway Analysis ──")
 
@@ -824,7 +825,8 @@ def main():
             pathway_df = aggregate_pathways(binn_results, args.reactome, args.out_dir)
             if pathway_df is not None and is_enabled("pathway_barplot"):
                 make_pathway_barplot(pathway_df, args.out_dir, top_n=20)
-
+    '''
+    
     if is_enabled("statistical_tests", args.tasks):
         print("\n── 5. Statistical Tests ──")
         make_statistical_tests(results_df, args.out_dir)
